@@ -1,0 +1,17 @@
+{
+    "user":
+        {
+            "username":"miyaw94016@yasiok.com",
+            "pass":"JohnDoe2001"
+        },
+    "teetimes":
+        {
+            "day":"Sunday",
+            "time":
+                [
+                    "07:09 AM",
+                    "07:18 AM"
+                ],
+            "numOfPlayers": 4
+        }
+}
