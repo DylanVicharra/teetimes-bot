@@ -67,6 +67,15 @@ def selectNumOfPlayers(driver, numOfPlayers):
         print(f'{numOfPlayers} players not available.')
         raise Exception('players error')
 
+def selectMaxOfPlayers(driver):
+    try:
+        buttonCantOfPlayers = WebDriverWait(driver, 5).until(lambda d: d.find_elements(By.XPATH, f'//div[@id="qty_popup_notice"]/a'))
+        buttonMaxPlayers = buttonCantOfPlayers[0]
+        buttonMaxPlayers.click()
+        sleep(1.5)
+    except:
+        raise Exception('players error')
+
 def loginUser(driver, emailUser, passwordUser):
     navbarLogin = driver.find_element(By.XPATH, f'//ul/li[@id="dropdown-login-id"]')
 

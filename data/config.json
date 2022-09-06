@@ -6,13 +6,13 @@
         },
     "teetimes":
         {
-            "day":"Saturday",
+            "day":"Sunday",
             "isScheduled":false,
             "theFirstNTimes":2,
             "time":
                 [
-                    "4:45 PM",
-                    "7:18 AM"
+                    "7:16 AM",
+                    "7:38 AM"
                 ],
             "numOfPlayers": 4
         }
