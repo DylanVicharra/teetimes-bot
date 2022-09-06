@@ -9,6 +9,32 @@ def clickTeeTimes(driver):
     teetimesButton.click()
     sleep(1.5)
 
+def getDateTime(driver):
+    principalGrid = WebDriverWait(driver, 5).until(lambda d: d.find_element(By.XPATH, f'//div[@class="col-lg-3 col-sm-4 no-gutter hidden-xs"]'))
+    
+    detailsGrid = principalGrid.find_elements(By.XPATH, f'//table[@class="table"]/tbody/tr')
+
+    textDatetime = ""
+    
+    for detail in detailsGrid:
+        if (('Date' in detail.text) or ('Time' in detail.text)):
+            textDatetime+=f'{detail.text.strip()} '
+        
+    return textDatetime
+
+def selectFirstTime(driver):
+    try:
+        timesAvailable = WebDriverWait(driver, 5).until(lambda d: d.find_elements(By.XPATH, f'//div[@class="col-md-3 col-sm-4 no-gutter"]'))
+
+        firstTime = timesAvailable[0]
+
+        buttonBook = firstTime.find_element(By.XPATH, './/button[@class="btn btn-success bookNowClass"]')
+        buttonBook.click()
+        sleep(1.5)
+    except:
+        print(f'times is not available')
+        raise Exception('times day error')
+
 def selectTime(driver, selectedTime):
     timesAvailable = WebDriverWait(driver, 5).until(lambda d: d.find_elements(By.XPATH, f'//div[@class="col-md-3 col-sm-4 no-gutter"]'))
 
@@ -35,7 +61,6 @@ def selectDay(driver, selectedDay):
 def selectNumOfPlayers(driver, numOfPlayers):
     try:
         buttonNumOfPlayers = WebDriverWait(driver, 5).until(lambda d: d.find_element(By.XPATH, f'//div[@id="qty_popup_notice"]/a[@qty="{numOfPlayers}"]'))
-        #print(driver.find_element(By.XPATH, f'//div[@class="col-lg-3 col-sm-4 no-gutter hidden-xs"]').text)
         buttonNumOfPlayers.click()
         sleep(1.5)
     except:

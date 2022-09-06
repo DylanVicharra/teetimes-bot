@@ -38,22 +38,46 @@ def main():
         # Number of times reserved
         numberOfTeetimes = len(teetimesData['time'])
         
-        for i in range(numberOfTeetimes):
-            try:
-                print("-------------------------------------------")
-                timesData = f"{teetimesData['day']}::{teetimesData['time'][i]}"
-                print(timesData)
-                selectDay(driverChrome, teetimesData['day'])
-                selectTime(driverChrome, teetimesData['time'][i])
-                selectNumOfPlayers(driverChrome, teetimesData['numOfPlayers'])
-                pressBook(driverChrome)
-                pressReserveTeeTimes(driverChrome)
-                waitSuccessReservation(driverChrome)
-                writeFileText(str(timesData), 'success')
-            except Exception as ex:
-                clickTeeTimes(driverChrome)
-                writeFileText(str(timesData), 'failure')
-        
+        if (teetimesData['isScheduled']):
+            for i in range(numberOfTeetimes):
+                timesData=""
+                try:
+                    print("-------------------------------------------")
+                    selectDay(driverChrome, teetimesData['day'])
+                    selectTime(driverChrome, teetimesData['time'][i])
+                    timesData = getDateTime(driverChrome)
+                    print(timesData)
+                    selectNumOfPlayers(driverChrome, teetimesData['numOfPlayers'])
+                    pressBook(driverChrome)
+                    pressReserveTeeTimes(driverChrome)
+                    waitSuccessReservation(driverChrome)
+                    writeFileText(str(timesData), 'success')
+                except Exception as ex:
+                    if timesData!='':
+                        writeFileText(str(timesData), 'failure')
+                    else:
+                        writeFileText(str(teetimesData['day']), 'failure')
+        else: 
+            for i in range(teetimesData['theFirstNTimes']):
+                timesData=""
+                try:
+                    print("-------------------------------------------")
+                    selectDay(driverChrome, teetimesData['day'])
+                    selectFirstTime(driverChrome)
+                    timesData = getDateTime(driverChrome)
+                    print(timesData)
+                    selectNumOfPlayers(driverChrome, teetimesData['numOfPlayers'])
+                    pressBook(driverChrome)
+                    pressReserveTeeTimes(driverChrome)
+                    waitSuccessReservation(driverChrome)
+                    writeFileText(str(timesData), 'success')
+                except Exception as ex:
+                    clickTeeTimes(driverChrome)
+                    if timesData!='':
+                        writeFileText(str(timesData), 'failure')
+                    else:
+                        writeFileText(str(teetimesData['day']), 'failure')
+
         print("-------------------------------------------")
         driverChrome.quit()
     except Exception as ex:

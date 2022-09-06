@@ -1,16 +1,18 @@
 {
     "user":
         {
-            "username":"miyaw94016@yasiok.com",
-            "pass":"JohnDoe2001"
+            "username":"correofalso@email.com",
+            "pass":"ABC1234"
         },
     "teetimes":
         {
-            "day":"Sunday",
+            "day":"Saturday",
+            "isScheduled":false,
+            "theFirstNTimes":2,
             "time":
                 [
-                    "07:09 AM",
-                    "07:18 AM"
+                    "4:45 PM",
+                    "7:18 AM"
                 ],
             "numOfPlayers": 4
         }
